@@ -26,7 +26,7 @@ public class LabelServiceImpl implements LabelService {
 
     @Override
     public void delete(Integer id) {
-        LabelMapper.deleteByPrimaryKey(1);
+        LabelMapper.deleteByPrimaryKey(id);
     }
 
     @Override

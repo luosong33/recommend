@@ -19,15 +19,15 @@ import java.util.List;
  * Created by Administrator on 2019/5/14.
  */
 @Controller
-@RequestMapping("/real")
+@RequestMapping("/label")
 public class LabelController {
 
     @Autowired
     private LabelService LabelService;
 
     @RequestMapping(value = "/one", method = RequestMethod.GET)
-    public String one() {
-        Label one = LabelService.selectOne(1);
+    public String one(@RequestParam("id") int id) {
+        Label one = LabelService.selectOne(id);
         return "one";
     }
 
@@ -52,7 +52,7 @@ public class LabelController {
     /**
      * insert
      */
-    @RequestMapping(value = "/insert", method = RequestMethod.GET)
+    @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public String insert(@RequestParam("label_classify") String label_classify,
                          @RequestParam("label_name") String label_name) {
         Label Label = new Label();

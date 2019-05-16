@@ -26,7 +26,7 @@ public class RealTimeRulesServiceImpl implements RealTimeRulesService {
 
     @Override
     public void delete(Integer id) {
-        realTimeRulesMapper.deleteByPrimaryKey(1);
+        realTimeRulesMapper.deleteByPrimaryKey(id);
     }
 
     @Override

@@ -17,7 +17,6 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2019/5/14.
- *
  */
 @Controller
 @RequestMapping("/real")
@@ -26,17 +25,17 @@ public class RealTimeRulesController {
     @Autowired
     private RealTimeRulesService realTimeRulesService;
 
-    @RequestMapping(value = "/one",method = RequestMethod.GET)
-    public String one(){
-        RealTimeRules one = realTimeRulesService.selectOne(1);
+    @RequestMapping(value = "/one", method = RequestMethod.GET)
+    public String one(@RequestParam("id") int id) {
+        RealTimeRules one = realTimeRulesService.selectOne(id);
         return "one";
     }
 
     /**
      * list
      */
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
-    public String list(){
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String list() {
         List<RealTimeRules> list = realTimeRulesService.selectList();
         return "list";
     }
@@ -44,8 +43,8 @@ public class RealTimeRulesController {
     /**
      * delete
      */
-    @RequestMapping(value = "/delete",method = RequestMethod.GET)
-    public String delete(@RequestParam("id") int id){
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String delete(@RequestParam("id") int id) {
         realTimeRulesService.delete(id);
         return "delete";
     }
@@ -53,10 +52,10 @@ public class RealTimeRulesController {
     /**
      * insert
      */
-    @RequestMapping(value = "/insert",method = RequestMethod.GET)
+    @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public String insert(@RequestParam("preference") String preference,
                          @RequestParam("interested") String interested,
-                         @RequestParam("may_interested") String may_interested){
+                         @RequestParam("may_interested") String may_interested) {
         RealTimeRules realTimeRules = new RealTimeRules();
         realTimeRules.setPreference(preference);
         realTimeRules.setInterested(interested);
@@ -70,13 +69,13 @@ public class RealTimeRulesController {
     /**
      * update
      */
-    @RequestMapping(value = "/update",method = RequestMethod.POST,
+    @RequestMapping(value = "/update", method = RequestMethod.POST,
             produces = "application/json; charset=utf-8")
     public String update(@RequestParam("id") int id,
                          @RequestParam("preference") String preference,
                          @RequestParam("interested") String interested,
                          @RequestParam("may_interested") String may_interested,
-                         HttpServletResponse resp){
+                         HttpServletResponse resp) {
         RealTimeRules realTimeRules = new RealTimeRules();
         realTimeRules.setId(id);
         realTimeRules.setPreference(preference);
@@ -90,7 +89,7 @@ public class RealTimeRulesController {
 //        String str = jsonObject.toString();
         try {
 //            resp.setContentType("text/html;charset=utf-8");
-            PrintWriter out=resp.getWriter();
+            PrintWriter out = resp.getWriter();
             out.println(jsonObject);
             out.close();
         } catch (IOException e) {
