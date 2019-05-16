@@ -17,7 +17,7 @@ import java.util.List;
 public class LabelServiceImpl implements LabelService {
 
     @Autowired
-    private LabelMapper LabelMapper;
+    private cn.ls.dao.LabelMapper LabelMapper;
 
     @Override
     public Integer add(Label Label) {
@@ -51,13 +51,17 @@ public class LabelServiceImpl implements LabelService {
         LabelService service = ctx.getBean(LabelService.class);
         List<Label> list = service.selectList();
         Label selectOne = service.selectOne(1);
+
         service.delete(1);
+
         Label label = new Label();
         label.setCreated(new Date());
         label.setUpdated(new Date());
         label.setLabel_classify("社会属性");
-        label.setLabel_name("写字楼民工");
+        label.setLabel_name("职业");
+        label.setLabel_value("写字楼民工");
         Integer add = service.add(label);
+
         label.setId(3);
         Integer update = service.update(label);
     }

@@ -9,6 +9,8 @@ public class Label {
 
     private String label_name;
 
+    private String label_value;
+
     private Date created;
 
     private Date updated;
@@ -35,6 +37,14 @@ public class Label {
 
     public void setLabel_name(String label_name) {
         this.label_name = label_name;
+    }
+
+    public String getLabel_value() {
+        return label_value;
+    }
+
+    public void setLabel_value(String label_value) {
+        this.label_value = label_value;
     }
 
     public Date getCreated() {

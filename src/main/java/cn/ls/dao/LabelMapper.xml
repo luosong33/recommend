@@ -5,11 +5,12 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="label_classify" jdbcType="VARCHAR" property="label_classify" />
     <result column="label_name" jdbcType="VARCHAR" property="label_name" />
+    <result column="label_value" jdbcType="VARCHAR" property="label_value" />
     <result column="created" jdbcType="TIMESTAMP" property="created" />
     <result column="updated" jdbcType="TIMESTAMP" property="updated" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, label_classify, label_name, created, updated
+    id, label_classify, label_name, label_value, created, updated
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -17,23 +18,23 @@
     from label
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from label
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
     <select id="selectList" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from label
     </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from label
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
   <insert id="insert" parameterType="cn.ls.entity.Label">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into label (label_classify, label_name, created, 
-      updated)
-    values (#{label_classify,jdbcType=VARCHAR}, #{label_name,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
-      #{updated,jdbcType=TIMESTAMP})
+    insert into label (label_classify, label_name, label_value, 
+      created, updated)
+    values (#{label_classify,jdbcType=VARCHAR}, #{label_name,jdbcType=VARCHAR}, #{label_value,jdbcType=VARCHAR}, 
+      #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cn.ls.entity.Label">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -46,6 +47,9 @@
       </if>
       <if test="label_name != null">
         label_name,
+      </if>
+      <if test="label_value != null">
+        label_value,
       </if>
       <if test="created != null">
         created,
@@ -60,6 +64,9 @@
       </if>
       <if test="label_name != null">
         #{label_name,jdbcType=VARCHAR},
+      </if>
+      <if test="label_value != null">
+        #{label_value,jdbcType=VARCHAR},
       </if>
       <if test="created != null">
         #{created,jdbcType=TIMESTAMP},
@@ -78,6 +85,9 @@
       <if test="label_name != null">
         label_name = #{label_name,jdbcType=VARCHAR},
       </if>
+      <if test="label_value != null">
+        label_value = #{label_value,jdbcType=VARCHAR},
+      </if>
       <if test="created != null">
         created = #{created,jdbcType=TIMESTAMP},
       </if>
@@ -91,6 +101,7 @@
     update label
     set label_classify = #{label_classify,jdbcType=VARCHAR},
       label_name = #{label_name,jdbcType=VARCHAR},
+      label_value = #{label_value,jdbcType=VARCHAR},
       created = #{created,jdbcType=TIMESTAMP},
       updated = #{updated,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

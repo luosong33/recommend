@@ -54,13 +54,15 @@ public class LabelController {
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public String insert(@RequestParam("label_classify") String label_classify,
-                         @RequestParam("label_name") String label_name) {
-        Label Label = new Label();
-        Label.setLabel_classify(label_classify);
-        Label.setLabel_name(label_name);
-        Label.setCreated(new Date());
-        Label.setUpdated(new Date());
-        LabelService.add(Label);
+                         @RequestParam("label_name") String label_name,
+                         @RequestParam("label_value") String label_value) {
+        Label label = new Label();
+        label.setLabel_classify(label_classify);
+        label.setLabel_name(label_name);
+        label.setLabel_value(label_value);
+        label.setCreated(new Date());
+        label.setUpdated(new Date());
+        LabelService.add(label);
         return "insert";
     }
 
@@ -72,16 +74,18 @@ public class LabelController {
     public String update(@RequestParam("id") int id,
                          @RequestParam("label_classify") String label_classify,
                          @RequestParam("label_name") String label_name,
+                         @RequestParam("label_value") String label_value,
                          HttpServletResponse resp) {
-        Label Label = new Label();
-        Label.setId(id);
-        Label.setLabel_classify(label_classify);
-        Label.setLabel_name(label_name);
-        Label.setCreated(new Date());
-        Label.setUpdated(new Date());
-        Integer i = LabelService.update(Label);
+        Label label = new Label();
+        label.setId(id);
+        label.setLabel_classify(label_classify);
+        label.setLabel_name(label_name);
+        label.setLabel_value(label_value);
+        label.setCreated(new Date());
+        label.setUpdated(new Date());
+        Integer i = LabelService.update(label);
 
-        JSONObject jsonObject = (JSONObject) JSONObject.toJSON(Label);
+        JSONObject jsonObject = (JSONObject) JSONObject.toJSON(label);
 //        String str = jsonObject.toString();
         try {
             resp.setContentType("text/html;charset=utf-8");
