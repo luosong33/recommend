@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ls.dao.RealTimeRulesMapper">
+
+    <resultMap id="BaseResultMap" type="cn.ls.entity.RealTimeRules">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="preference" jdbcType="VARCHAR" property="preference"/>
+        <result column="interested" jdbcType="VARCHAR" property="interested"/>
+        <result column="may_interested" jdbcType="INTEGER" property="mayInterested"/>
+        <result column="created" jdbcType="TIMESTAMP" property="created"/>
+        <result column="updated" jdbcType="TIMESTAMP" property="updated"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      id, preference, interested, may_interested, created, updated
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String"
+            resultType="cn.ls.entity.RealTimeRules">
+        select
+        <include refid="Base_Column_List"/>
+        from real_time_rules
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectList" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from real_time_rules
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+      delete from real_time_rules
+      where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="cn.ls.entity.RealTimeRules">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into real_time_rules (preference, interested, may_interested,
+        created, updated)
+        values (#{preference,jdbcType=VARCHAR}, #{interested,jdbcType=VARCHAR},
+        #{may_interested,jdbcType=INTEGER},
+        #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="cn.ls.entity.RealTimeRules">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into real_time_rules
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="preference != null">
+                preference,
+            </if>
+            <if test="interested != null">
+                interested,
+            </if>
+            <if test="may_interested != null">
+                may_interested,
+            </if>
+            <if test="created != null">
+                created,
+            </if>
+            <if test="updated != null">
+                updated,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="preference != null">
+                #{preference,jdbcType=VARCHAR},
+            </if>
+            <if test="interested != null">
+                #{interested,jdbcType=VARCHAR},
+            </if>
+            <if test="may_interested != null">
+                #{may_interested,jdbcType=INTEGER},
+            </if>
+            <if test="created != null">
+                #{created,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updated != null">
+                #{updated,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="cn.ls.entity.RealTimeRules">
+        update real_time_rules
+        <set>
+            <if test="preference != null">
+                preference = #{preference,jdbcType=VARCHAR},
+            </if>
+            <if test="interested != null">
+                interested = #{interested,jdbcType=VARCHAR},
+            </if>
+            <if test="may_interested != null">
+                may_interested = #{may_interested,jdbcType=INTEGER},
+            </if>
+            <if test="created != null">
+                created = #{created,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updated != null">
+                updated = #{updated,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="cn.ls.entity.RealTimeRules">
+      update real_time_rules
+      set preference = #{preference,jdbcType=VARCHAR},
+        interested = #{interested,jdbcType=VARCHAR},
+        may_interested = #{may_interested,jdbcType=INTEGER},
+        created = #{created,jdbcType=TIMESTAMP},
+        updated = #{updated,jdbcType=TIMESTAMP}
+      where id = #{id,jdbcType=VARCHAR}
+    </update>
+<!--
+    <select id="selectByPrimaryKey" parameterType="java.lang.String"
+            resultType="cn.ls.entity.RealTimeRules">
+
+    select
+    id, preference, interested, may_interested, created, updated
+    from real_time_rules
+    where id = #{id,jdbcType=VARCHAR}
+  </select>-->
+
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <bean class="com.anve.wrangler.common.registry.ZookeeperRegistry">
+        <property name="clusterAddress" value="10.0.2.228:2181"/><!--10.0.2.228-->
+    </bean>
+
+    <bean class="com.anve.wrangler.common.config.ApplicationConfig">
+        <property name="name" value="anti"/>
+        <property name="owner" value="test"/>
+    </bean>
+
+    <bean id="providerService" class="com.anve.wrangler.sahara.proxy.SaharaProxyFactory"
+          destroy-method="close">
+        <property name="interface" value="com.anve.anti.garbage.iface.SensitiveFilterService"/>
+    </bean>
+
+</beans>
