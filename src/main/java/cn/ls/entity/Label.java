@@ -3,38 +3,38 @@ package cn.ls.entity;
 import java.util.Date;
 
 public class Label {
-    private String id;
+    private Integer id;
 
-    private String preference;
+    private String label_classify;
 
-    private String interested;
+    private String label_name;
 
     private Date created;
 
     private Date updated;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getPreference() {
-        return preference;
+    public String getLabel_classify() {
+        return label_classify;
     }
 
-    public void setPreference(String preference) {
-        this.preference = preference;
+    public void setLabel_classify(String label_classify) {
+        this.label_classify = label_classify;
     }
 
-    public String getInterested() {
-        return interested;
+    public String getLabel_name() {
+        return label_name;
     }
 
-    public void setInterested(String interested) {
-        this.interested = interested;
+    public void setLabel_name(String label_name) {
+        this.label_name = label_name;
     }
 
     public Date getCreated() {

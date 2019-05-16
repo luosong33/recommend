@@ -2,45 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.ls.dao.LabelMapper">
   <resultMap id="BaseResultMap" type="cn.ls.entity.Label">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="preference" jdbcType="VARCHAR" property="preference" />
-    <result column="interested" jdbcType="VARCHAR" property="interested" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="label_classify" jdbcType="VARCHAR" property="label_classify" />
+    <result column="label_name" jdbcType="VARCHAR" property="label_name" />
     <result column="created" jdbcType="TIMESTAMP" property="created" />
     <result column="updated" jdbcType="TIMESTAMP" property="updated" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, preference, interested, created, updated
+    id, label_classify, label_name, created, updated
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from label
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="selectList" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from label
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from label
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.ls.entity.Label">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into label (preference, interested, created, 
+    insert into label (label_classify, label_name, created, 
       updated)
-    values (#{preference,jdbcType=VARCHAR}, #{interested,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
+    values (#{label_classify,jdbcType=VARCHAR}, #{label_name,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
       #{updated,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cn.ls.entity.Label">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into label
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="preference != null">
-        preference,
+      <if test="label_classify != null">
+        label_classify,
       </if>
-      <if test="interested != null">
-        interested,
+      <if test="label_name != null">
+        label_name,
       </if>
       <if test="created != null">
         created,
@@ -50,11 +55,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="preference != null">
-        #{preference,jdbcType=VARCHAR},
+      <if test="label_classify != null">
+        #{label_classify,jdbcType=VARCHAR},
       </if>
-      <if test="interested != null">
-        #{interested,jdbcType=VARCHAR},
+      <if test="label_name != null">
+        #{label_name,jdbcType=VARCHAR},
       </if>
       <if test="created != null">
         #{created,jdbcType=TIMESTAMP},
@@ -67,11 +72,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="cn.ls.entity.Label">
     update label
     <set>
-      <if test="preference != null">
-        preference = #{preference,jdbcType=VARCHAR},
+      <if test="label_classify != null">
+        label_classify = #{label_classify,jdbcType=VARCHAR},
       </if>
-      <if test="interested != null">
-        interested = #{interested,jdbcType=VARCHAR},
+      <if test="label_name != null">
+        label_name = #{label_name,jdbcType=VARCHAR},
       </if>
       <if test="created != null">
         created = #{created,jdbcType=TIMESTAMP},
@@ -80,14 +85,14 @@
         updated = #{updated,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.ls.entity.Label">
     update label
-    set preference = #{preference,jdbcType=VARCHAR},
-      interested = #{interested,jdbcType=VARCHAR},
+    set label_classify = #{label_classify,jdbcType=VARCHAR},
+      label_name = #{label_name,jdbcType=VARCHAR},
       created = #{created,jdbcType=TIMESTAMP},
       updated = #{updated,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

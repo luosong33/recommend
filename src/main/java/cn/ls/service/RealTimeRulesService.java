@@ -9,11 +9,11 @@ import java.util.List;
  */
 public interface RealTimeRulesService {
 
-    void add(RealTimeRules realTimeRules);
-    void delete(String id);
-    void update(RealTimeRules realTimeRules);
+    Integer add(RealTimeRules realTimeRules);
+    void delete(Integer id);
+    Integer update(RealTimeRules realTimeRules);
     List<RealTimeRules> selectList();
-    RealTimeRules selectOne(String id);
+    RealTimeRules selectOne(Integer id);
 
 
 }

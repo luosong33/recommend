@@ -3,23 +3,23 @@ package cn.ls.entity;
 import java.util.Date;
 
 public class RealTimeRules {
-    private String id;
+    private Integer id;
 
     private String preference;
 
     private String interested;
 
-    private Integer mayInterested;
+    private String may_interested;
 
     private Date created;
 
     private Date updated;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -39,12 +39,12 @@ public class RealTimeRules {
         this.interested = interested;
     }
 
-    public Integer getMayInterested() {
-        return mayInterested;
+    public String getMay_interested() {
+        return may_interested;
     }
 
-    public void setMayInterested(Integer mayInterested) {
-        this.mayInterested = mayInterested;
+    public void setMay_interested(String may_interested) {
+        this.may_interested = may_interested;
     }
 
     public Date getCreated() {

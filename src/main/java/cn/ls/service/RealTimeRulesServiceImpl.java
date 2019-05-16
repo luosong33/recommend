@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,18 +20,18 @@ public class RealTimeRulesServiceImpl implements RealTimeRulesService {
     private RealTimeRulesMapper realTimeRulesMapper;
 
     @Override
-    public void add(RealTimeRules realTimeRules) {
-
+    public Integer add(RealTimeRules realTimeRules) {
+        return realTimeRulesMapper.insert(realTimeRules);
     }
 
     @Override
-    public void delete(String id) {
-
+    public void delete(Integer id) {
+        realTimeRulesMapper.deleteByPrimaryKey(1);
     }
 
     @Override
-    public void update(RealTimeRules realTimeRules) {
-
+    public Integer update(RealTimeRules realTimeRules) {
+        return realTimeRulesMapper.updateByPrimaryKeySelective(realTimeRules);
     }
 
 //    @Override
@@ -40,7 +41,7 @@ public class RealTimeRulesServiceImpl implements RealTimeRulesService {
     }
 
     @Override
-    public RealTimeRules selectOne(String id) {
+    public RealTimeRules selectOne(Integer id) {
         RealTimeRules realTimeRules = realTimeRulesMapper.selectByPrimaryKey(id);
         return realTimeRules;
     }
@@ -48,7 +49,17 @@ public class RealTimeRulesServiceImpl implements RealTimeRulesService {
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
         RealTimeRulesService service = ctx.getBean(RealTimeRulesService.class);
-        List<RealTimeRules> list = service.selectList();
-//        RealTimeRules selectOne = service.selectOne("1");
+//        List<RealTimeRules> list = service.selectList();
+//        RealTimeRules selectOne = service.selectOne(1);
+//        service.delete(1);
+        RealTimeRules realTimeRules = new RealTimeRules();
+        realTimeRules.setPreference("10");
+        realTimeRules.setInterested("3");
+        realTimeRules.setMay_interested("1");
+        realTimeRules.setCreated(new Date());
+        realTimeRules.setUpdated(new Date());
+//        Integer add = service.add(realTimeRules);
+        realTimeRules.setId(3);
+        Integer update = service.update(realTimeRules);
     }
 }
