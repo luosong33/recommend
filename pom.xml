@@ -21,7 +21,7 @@
         <com.mybatis.mybatis_spring.version>1.2.3</com.mybatis.mybatis_spring.version>
         <com.google.gson.version>2.7</com.google.gson.version>
         <javax.servlet.version>3.1.0</javax.servlet.version>
-        <spring.versiong>4.2.5.RELEASE</spring.versiong>
+        <spring.versiong>5.2.7.RELEASE</spring.versiong>
         <redis.clients.version>2.7.3</redis.clients.version>
         <com.dyuproject.protostuff.version>1.0.8</com.dyuproject.protostuff.version>
     </properties>
